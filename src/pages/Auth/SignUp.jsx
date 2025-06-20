@@ -8,7 +8,7 @@ import { API_PATHS } from "../../utils/apiPaths.js";
 import axiosInstance from "../../utils/axiosInstance.js";
 
 
-const SignUp = ({ setCurrentPage }) => {
+const SignUp = ({ setCurrentPage, openAuthModel }) => {
   const [profilePic, setProfilePic] = useState(null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -64,7 +64,7 @@ const SignUp = ({ setCurrentPage }) => {
         // Update User Context
         localStorage.setItem("token", token);
         updateUser(response.data);
-        navigate("/dashboard");
+        openAuthModel(false)
       }
 
     } catch (err) {
