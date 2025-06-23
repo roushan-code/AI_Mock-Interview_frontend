@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DashboardLayout from "../../components/layouts/DashboardLayout";
-import { LuClock } from 'react-icons/lu';
+import { LuClock, LuPlay } from 'react-icons/lu';
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { UserContext } from '../../context/useContext';
 import { API_PATHS } from '../../utils/apiPaths';
@@ -14,6 +14,8 @@ const MockTest = () => {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
+  const [showStartAlert, setShowStartAlert] = useState(true);
+  const [isQuizStarted, setIsQuizStarted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [submitAlert, setSubmitAlert] = useState(false);
@@ -49,7 +51,7 @@ const MockTest = () => {
   // Timer effect - only runs when quiz is started
   useEffect(() => {
     let timer;
-    if ( timeRemaining > 0) {
+    if (isQuizStarted && timeRemaining > 0) {
       timer = setInterval(() => {
         setTimeRemaining(prev => {
           if (prev <= 1) {
@@ -65,7 +67,7 @@ const MockTest = () => {
     return () => {
       if (timer) clearInterval(timer);
     };
-  }, [ timeRemaining]);
+  }, [isQuizStarted, timeRemaining]);
 
 
 
@@ -103,6 +105,11 @@ const MockTest = () => {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  const handleStartQuiz = () => {
+    setShowStartAlert(false);
+    setIsQuizStarted(true);
+    setTimeRemaining(metaData.timeLimit); // Set initial time limit
+  };
   const handleNextQuestion = () => {
     if (currentQuestion < metaData.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
@@ -173,6 +180,84 @@ const MockTest = () => {
             >
               Back to Dashboard
             </button>
+          </div>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+    // Start Alert Modal
+  if (showStartAlert && !loading) {
+    return (
+      <DashboardLayout>
+        <div className="min-h-screen bg-transparent flex items-center justify-center p-4">
+          <div className="bg-[#1e1e3f]/95 backdrop-blur-md rounded-3xl p-8 border border-purple-500/30 shadow-2xl max-w-lg w-full relative overflow-hidden">
+            {/* Decorative background elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-purple-600/10 rounded-full -translate-y-16 translate-x-16"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-600/10 rounded-full translate-y-12 -translate-x-12"></div>
+
+            <div className="relative z-10">
+              {/* Header */}
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600/20 rounded-full mb-4">
+                </div>
+                <h2 className="text-2xl font-bold text-white mb-2">Ready to Start Your Mock Test?</h2>
+                <p className="text-gray-300 text-sm">
+                  You're about to begin a timed mock test for <span className="text-purple-400 font-semibold">{metaData.course}</span>
+                </p>
+              </div>
+
+              {/* Quiz Details */}
+              <div className="bg-purple-900/30 rounded-xl p-4 mb-6 border border-purple-500/20">
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="text-center">
+                    <div className="text-purple-300 font-medium">{metaData.questions.length}</div>
+                    <div className="text-gray-400">Questions</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-purple-300 font-medium">{metaData.timeLimit / 60} min</div>
+                    <div className="text-gray-400">Duration</div>
+                  </div>
+                  <div className="text-center col-span-2">
+                    <div className="text-purple-300 font-medium">20</div>
+                    <div className="text-gray-400">Total Marks</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Important Instructions */}
+              <div className="bg-amber-900/20 border border-amber-500/30 rounded-xl p-4 mb-6">
+                <h3 className="text-amber-400 font-semibold mb-2 flex items-center">
+                  Important Instructions
+                </h3>
+                <ul className="text-amber-200/80 text-sm space-y-1">
+                  <li>• Timer will start immediately after clicking "Start Quiz"</li>
+                  <li>• You can navigate between questions freely</li>
+                  <li>• Quiz will auto-submit when time runs out</li>
+                  <li>• Make sure you have a stable internet connection</li>
+                </ul>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                {metaData && metaData.isGiven && (
+                  <button
+                    onClick={handleViewResults}
+                    className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 border border-blue-500 rounded-xl text-white font-medium transition-all duration-200 hover:from-blue-700 hover:to-blue-800 shadow-lg shadow-blue-600/25"
+                  >
+                    <IoBarChart size={18} />
+                    View Results
+                  </button>
+                )}
+                <button
+                  onClick={handleStartQuiz}
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 border border-purple-500 rounded-xl text-white font-medium transition-all duration-200 hover:from-purple-700 hover:to-purple-800 shadow-lg shadow-purple-600/25"
+                >
+                  <LuPlay size={18} />
+                  Start Quiz
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </DashboardLayout>

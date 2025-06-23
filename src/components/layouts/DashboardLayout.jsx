@@ -5,10 +5,10 @@ import { UserContext } from "../../context/useContext";
 const DashboardLayout=({ children }) => {
     const { user } = useContext(UserContext);
     return (
-        <div >
-            <Navbar/>
-            {user && <div >{children}</div>}
-        </div>
+    <div style={{ height: "fit-content", paddingBottom: "20px" }} >
+        <Navbar/>
+        {user && <div >{children}</div>}
+    </div>
     );
 };
 export default DashboardLayout;
