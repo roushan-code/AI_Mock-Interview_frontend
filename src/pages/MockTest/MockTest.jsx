@@ -235,6 +235,8 @@ const MockTest = () => {
                   <li>• You can navigate between questions freely</li>
                   <li>• Quiz will auto-submit when time runs out</li>
                   <li>• Make sure you have a stable internet connection</li>
+                  <li>• For early submission select the last question and click on submit button</li>
+                  <li>• Review your answers before submitting</li>
                 </ul>
               </div>
 
@@ -366,7 +368,7 @@ const MockTest = () => {
             {/* Question */}
             <div className="mb-8">
               <h2 className="text-xl md:text-2xl font-semibold text-white leading-relaxed italic">
-                {currentQuestionData.question}
+                Q{currentQuestionData.index} : {currentQuestionData.question}
               </h2>
             </div>
 
