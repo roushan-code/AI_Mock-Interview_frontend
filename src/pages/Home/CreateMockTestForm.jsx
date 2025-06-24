@@ -90,55 +90,93 @@ const CreateMockTestForm = () => {
         }
 
     };
-    return <div className="w-[90vw] md:w-[35vw] p-7 flex flex-col justify-center ">
-        <h3 className="text-lg font-semibold text-black">
-            Start a New Interview Journey
-        </h3>
-        <p className="text-xs text-slate-700 mt-[5px] mb-3">
-            Fill out a few quick details and unlock your personalized set of
-            interview questions!
-        </p>
-        <form onSubmit={handleCreateSession} className="">
-            <Input
-                value={formData.role}
-                onChange={({ target }) => handleChange("role", target.value)}
-                label="Course Name"
-                placeholder="(e.g., BCA, MCA, Btech etc.)"
-                type="text"
-            />
-            <Input
-                value={formData.experience}
-                onChange={({ target }) => handleChange("experience", target.value)}
-                label="Questions level"
-                placeholder="(Easy, Medium, Hard)"
-                type="text"
-            />
-            <Input
-                value={formData.topicsToFocus}
-                onChange={({ target }) => handleChange("topicsToFocus", target.value)}
-                label="Topics to Focus On"
-                placeholder=" (e.g., C, Python Programming, Data Structure etc.)"
-                type="text"
-            />
-            <Input
-                value={formData.description}
-                onChange={({ target }) => handleChange("description", target.value)}
-                label="Description"
-                placeholder=" (Any specific goals or notes for this session)"
-                type="text"
-            />
-            {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
+    return (
+        <div className="w-full px-4 flex flex-col justify-center text-slate-200">
+            <h3 className="text-xl font-semibold text-white mb-1">
+                Start a New Interview Journey
+            </h3>
 
-            <button
-            type="submit"
-            className="btn-primary mt-2 w-full"
-            disabled={isLoading}
-            >
-            
-               {isLoading && <FaSpinner className="animate-spin mr-2"/>} Generate Mock Test Session
-            </button>
-        </form>
+            <p className="text-sm text-slate-400 mb-6">
+                Fill out a few quick details and unlock your personalized set of interview questions!
+            </p>
+
+            <form onSubmit={handleCreateSession} className="flex flex-col gap-5">
+                {/* Course Name */}
+                <div className="flex flex-col gap-1.5">
+                <label htmlFor="role" className="text-sm font-medium text-slate-300">
+                    Course Name
+                </label>
+                <input
+                    id="role"
+                    type="text"
+                    value={formData.role}
+                    onChange={({ target }) => handleChange("role", target.value)}
+                    placeholder="(e.g., BCA, MCA, BTech etc.)"
+                    className="bg-[#1e1e28] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#00ffe0]/60 shadow-inner transition"
+                />
+                </div>
+
+                {/* Question Level */}
+                <div className="flex flex-col gap-1.5">
+                <label htmlFor="experience" className="text-sm font-medium text-slate-300">
+                    Questions Level
+                </label>
+                <input
+                    id="experience"
+                    type="text"
+                    value={formData.experience}
+                    onChange={({ target }) => handleChange("experience", target.value)}
+                    placeholder="(Easy, Medium, Hard)"
+                    className="bg-[#1e1e28] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#00ffe0]/60 shadow-inner transition"
+                />
+                </div>
+
+                {/* Topics */}
+                <div className="flex flex-col gap-1.5">
+                <label htmlFor="topicsToFocus" className="text-sm font-medium text-slate-300">
+                    Topics to Focus On
+                </label>
+                <input
+                    id="topicsToFocus"
+                    type="text"
+                    value={formData.topicsToFocus}
+                    onChange={({ target }) => handleChange("topicsToFocus", target.value)}
+                    placeholder="(e.g., C, Python Programming, Data Structures etc.)"
+                    className="bg-[#1e1e28] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#00ffe0]/60 shadow-inner transition"
+                />
+                </div>
+
+                {/* Description */}
+                <div className="flex flex-col gap-1.5">
+                <label htmlFor="description" className="text-sm font-medium text-slate-300">
+                    Description
+                </label>
+                <input
+                    id="description"
+                    type="text"
+                    value={formData.description}
+                    onChange={({ target }) => handleChange("description", target.value)}
+                    placeholder="(Any specific goals or notes for this session)"
+                    className="bg-[#1e1e28] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#00ffe0]/60 shadow-inner transition"
+                />
+                </div>
+
+                {/* Error */}
+                {error && <p className="text-red-500 text-xs -mt-2">{error}</p>}
+
+                {/* Submit Button */}
+                <button
+                type="submit"
+                className={`w-full bg-[#00ffe0]/10 text-[#00ffe0] border border-[#00ffe0]/40 rounded-lg py-2.5 mt-2 font-semibold hover:bg-[#00ffe0]/20 hover:text-white transition-all duration-300 shadow-[0_0_10px_rgba(0,255,224,0.1)] ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                disabled={isLoading}
+                >
+                {isLoading && <FaSpinner className="animate-spin inline-block mr-2" />} 
+                Generate Mock Test Session
+                </button>
+            </form>
         </div>
+
+    )
 }
 
 export default CreateMockTestForm

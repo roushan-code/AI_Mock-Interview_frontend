@@ -4,7 +4,7 @@ import {Toaster} from 'react-hot-toast';
 
 // import Login from "./pages/Auth/Login";
 // import SignUp from "./pages/Auth/SignUp";
-import LandingPage from "./pages/LandingPage.jsx";
+import LandingPage from "./pages/LandingPage/LandingPage.jsx";
 import Dashboard from "./pages/Home/Dashboard.jsx";
 import InterviewPrep from "./pages/InterviewPrep/InterviewPrep.jsx";
 import UserProvider from './context/useContext.jsx';
@@ -14,7 +14,7 @@ import MockTest from './pages/MockTest/MockTest.jsx';
 const App = () => {
   return (
     <UserProvider>
-    <div className='bg-black bg-gradient-to-r from-black to-[#29176f]' >
+    <div className='bg-[#0d0d17]' >
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
