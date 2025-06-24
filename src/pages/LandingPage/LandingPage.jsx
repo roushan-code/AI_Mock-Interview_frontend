@@ -27,7 +27,7 @@ const LandingPage = () => {
 
   const { user } = useContext(UserContext);
   // const navigate = useNavigate();
-  const [gotoDashboard, setGotoDashboard] = useState(true);
+  const [gotoDashboard, setGotoDashboard] = useState(false);
 
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
@@ -42,10 +42,10 @@ const LandingPage = () => {
 
   return (
     <div className="font-sans text-gray-200 overflow-x-hidden">
-     
+
       <header className="fixed top-0 w-full z-10 px-4 md:px-8 py-3 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          
+
           <Logo />
 
           {user ? (
@@ -56,7 +56,7 @@ const LandingPage = () => {
               <span className="hidden sm:inline">Login / Sign Up</span>
             </button>
           )}
-          
+
         </div>
       </header>
 
@@ -65,9 +65,9 @@ const LandingPage = () => {
         <div className="relative z-10 text-center px-4 max-w-3xl">
 
           {/* AI Tagline */}
-        <p className="text-sm uppercase tracking-wider text-white mb-3 font-semibold">
-          <span className="text-[#00ffe0] drop-shadow-[0_0_6px_#00ffe066]">Powered by AI.</span> Personalized for You.
-        </p>
+          <p className="text-sm uppercase tracking-wider text-white mb-3 font-semibold">
+            <span className="text-[#00ffe0] drop-shadow-[0_0_6px_#00ffe066]">Powered by AI.</span> Personalized for You.
+          </p>
 
 
           {/* Main Heading */}
@@ -113,8 +113,8 @@ const LandingPage = () => {
       </section>
 
       <div className={`${gotoDashboard ? 'flex' : 'hidden'} fixed inset-0 flex z-100 items-center justify-center w-full h-full bg-black/40 `} onClick={() => setGotoDashboard(false)}>
-        <GotoDashboardCard gotoDashboard={gotoDashboard}/>
-        </div>
+        <GotoDashboardCard gotoDashboard={gotoDashboard} />
+      </div>
 
 
 
@@ -204,7 +204,7 @@ const LandingPage = () => {
       <section className="py-20 px-8 bg-[#12121e99] backdrop-blur-md border border-white/5 shadow-[0_6px_24px_rgba(0,0,0,0.4)] text-[#f1f5f9] text-center max-w-[1100px] mx-auto my-16 rounded-xl">
         <h2 className="text-2xl md:text-3xl font-semibold mb-12">How It Works</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-[1000px] mx-auto">
-          
+
           <div className="bg-[#1e1e28cc] border border-white/10 rounded-2xl p-8 backdrop-blur-md shadow-[0_6px_20px_rgba(0,255,255,0.04)]">
             <div className="text-[#7dd3fc] mb-4">
               <i data-lucide="user-search" className="w-8 h-8 mx-auto drop-shadow-[0_0_4px_#7dd3fc88]"></i>
@@ -301,12 +301,12 @@ const LandingPage = () => {
         }}
         hideHeader
       >
-          {currentPage === "login" && (
-            <Login setCurrentPage={setCurrentPage} openAuthModel={setOpenAuthModal} />
-          )}
-          {currentPage === "signup" && (
-            <SignUp setCurrentPage={setCurrentPage} openAuthModel={setOpenAuthModal}  />
-          )}
+        {currentPage === "login" && (
+          <Login setCurrentPage={setCurrentPage} openAuthModel={setOpenAuthModal} />
+        )}
+        {currentPage === "signup" && (
+          <SignUp setCurrentPage={setCurrentPage} openAuthModel={setOpenAuthModal} />
+        )}
       </Model>
     </div>
   );
