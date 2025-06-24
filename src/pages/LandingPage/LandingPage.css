@@ -1,0 +1,26 @@
+/* styles.css */
+.hero-gradient {
+  background: linear-gradient(294deg,
+    rgba(0, 212, 255, 0.35),
+    rgba(58, 12, 163, 0.3),
+    rgba(153, 0, 255, 0.3),
+    rgba(0, 255, 198, 0.25),
+    rgba(255, 0, 191, 0.3));
+  background-size: 600% 600%;
+  animation: heroShift 20s ease-in-out infinite;
+}
+
+@keyframes heroShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,255,255,0.15), transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}

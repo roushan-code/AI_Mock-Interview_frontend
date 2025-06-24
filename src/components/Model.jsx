@@ -10,29 +10,35 @@ const Model = ({
 }) => {
     if (!isOpen) return null;
 
-    return <div className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black/40">
-        {/* Modal Content */}
-        <div
-            className={`relative flex flex-col bg-white shadow-lg rounded-lg overflow-hidden`}>
-            {/* Modal Header */}
-            {!hideHeader && (
-                <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                    <h3 className="md:text-lg font-medium text-gray-900">{title}</h3>
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black/40 backdrop-blur-sm">
+            {/* Modal Content */}
+            <div className="relative z-[1] max-w-xl w-full mx-auto bg-[#12121ecc] text-slate-200 rounded-[20px] px-6 md:px-10 py-10 backdrop-blur-[10px] border border-white/5 shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:rounded-[inherit] before:bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.03),transparent_70%)] before:z-[-1] before:pointer-events-none overflow-hidden">
+                
+                {/* Modal Header */}
+                {!hideHeader && (
+                <div className="mb-6">
+                    <h3 className="text-2xl font-semibold text-white text-center">{title}</h3>
                 </div>
-            )}
-            <button
+                )}
+
+                {/* Close Button */}
+                <button
                 type="button"
-                className="text-gray-400 bg-transparent hover:bg-orange-100 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex justify-center items-center absolute top-3.5 right-3.5 cursor-pointer text-[30px]"
+                className="absolute top-4 right-4 text-slate-400 hover:text-white text-2xl hover:scale-110 transition"
                 onClick={onClose}
                 >
                     <IoIosClose />
-        </button>
-        {/* Modal Body (Scrollable) */}
-        <div className="flex-1 overflow-y-auto custom-scrollbar">
-            {children}
+                </button>
+
+                {/* Modal Body */}
+                <div className="max-h-[80vh] overflow-y-auto px-1 custom-scrollbar">
+                    {children}
+                </div>
+
+            </div>
         </div>
-    </div >
-</div >
+    );
 
 }
 
