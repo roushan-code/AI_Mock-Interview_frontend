@@ -13,6 +13,7 @@ import Login from '../Auth/Login';
 import ProfileInfoCard from '../../components/Cards/ProfileInfoCard';
 import { UserContext } from '../../context/useContext';
 import GotoDashboardCard from '../GotoDashboardCard';
+import Logo from '../../logo';
 
 import { createIcons, icons } from "lucide";
 import LandingParticles from '../../components/LandingParticles';
@@ -44,13 +45,9 @@ const LandingPage = () => {
      
       <header className="fixed top-0 w-full z-10 px-4 md:px-8 py-3 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-2 text-xl font-bold text-white">
-            <span>🌌</span>
-            <span className="tracking-tight font-bold text-[1.3rem] sm:text-[1.45rem] text-white group">
-              <span className="text-[#00ffe0] drop-shadow-[0_0_6px_#00ffe077] group-hover:animate-pulse">Prep</span>
-              <span className="text-white/90">Pilot</span>
-            </span>
-          </div>
+          
+          <Logo />
+
           {user ? (
             <ProfileInfoCard />
           ) : (
@@ -283,9 +280,7 @@ const LandingPage = () => {
 
       <footer className="bg-[#0b0b12] text-[#a1a1aa] py-12 text-center border-t border-white/5">
         <div className="max-w-5xl mx-auto flex flex-col gap-6 items-center">
-          <div className="text-white text-lg font-semibold flex items-center gap-2">
-            ✨ PrepPilot
-          </div>
+          <Logo />
           <div className="flex flex-wrap justify-center gap-4 text-sm">
             <a href="#" className="hover:text-white">Privacy</a>
             <a href="#" className="hover:text-white">Terms</a>
