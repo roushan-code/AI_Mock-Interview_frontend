@@ -29,7 +29,10 @@ const   Dashboard1 = () => {
       const response = await axiosInstance.get(API_PATHS.SESSION.GET_MOCK_SESSIONS);
       // console.log("Fetched Sessions:", response.data.sessions);
       setSessions(response.data.sessions);
-      setPercentage(response?.data.AnsTotalPercentage || 0);
+      // change percentage to 22.33 form
+      const percent = response?.data.AnsTotalPercentage || 0;
+
+      setPercentage(percent.toFixed(2) || 0);
     } catch (error) {
       console.error("Error fetching sessions:", error);
       toast.error("Failed to fetch sessions");
