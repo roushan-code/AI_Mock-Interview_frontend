@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
 
 const ProfilePhotoSelector = ({ image, setImage, preview, setPreview }) => {
@@ -7,24 +7,44 @@ const ProfilePhotoSelector = ({ image, setImage, preview, setPreview }) => {
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
+            // Clean up previous preview URL to prevent memory leak
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+            
             // Update the image state
             setImage(file);
             // Generate preview URL from the file
-            const preview = URL.createObjectURL(file);
+            const newPreview = URL.createObjectURL(file);
             if (setPreview) {
-                setPreview(preview)
+                setPreview(newPreview);
             }
-            setPreviewUrl(preview);
+            setPreviewUrl(newPreview);
         }
     };
+    
     const handleRemoveImage = () => {
+        // Clean up preview URL to prevent memory leak
+        if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+        }
+        
         setImage(null);
         setPreviewUrl(null);
 
         if (setPreview) {
-            setPreview(null)
+            setPreview(null);
         }
     };
+
+    // Cleanup on unmount
+    useEffect(() => {
+        return () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+        };
+    }, [previewUrl]);
 
     const onChooseFile = () => {
         if (inputRef.current) {
@@ -50,7 +70,10 @@ const ProfilePhotoSelector = ({ image, setImage, preview, setPreview }) => {
                 <button
                     type="button"
                     className="w-7 h-7 flex items-center justify-center bg-[#00ffe0] text-black rounded-full absolute -bottom-1 -right-1 shadow-md hover:scale-105 transition"
-                    onClick={onChooseFile}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onChooseFile();
+                    }}
                 >
                     <LuUpload className="w-4 h-4" />
                 </button>
@@ -65,7 +88,10 @@ const ProfilePhotoSelector = ({ image, setImage, preview, setPreview }) => {
                 <button
                     type="button"
                     className="w-7 h-7 flex items-center justify-center bg-red-500 text-white rounded-full absolute -bottom-1 -right-1 shadow-md hover:scale-105 transition"
-                    onClick={handleRemoveImage}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveImage();
+                    }}
                 >
                     <LuTrash className="w-4 h-4" />
                 </button>
