@@ -179,7 +179,7 @@ const   Dashboard1 = () => {
           onClose={() => setOpenDeleteAlert({ open: false, data: null })}
           title="Delete Alert"
         >
-          <div className="w-[30vw]">
+          <div className="w-[100%]">
             <DeleteAlertContent
               content={`Are you sure you want to delete the session for ${openDeleteAlert?.data?.course} course?`}
               onDelete={() => {
