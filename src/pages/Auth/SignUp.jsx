@@ -55,7 +55,7 @@ const SignUp = ({ setCurrentPage, openAuthModel }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response);
+      // console.log(response);
     
       const { token } = response.data;
 

@@ -34,9 +34,6 @@ const Login = ({ setCurrentPage, openAuthModel  }) => {
     // Login API call
 
     try {
-      console.log(email, password);
-      console.log(API_PATHS.AUTH.LOGIN);
-      // console.log(axiosInstance);
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,
         password,
