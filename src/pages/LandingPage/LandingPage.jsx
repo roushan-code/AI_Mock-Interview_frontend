@@ -1,10 +1,16 @@
 
 import "./LandingPage.css";
 
-import { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+// import HERO_IMG from '../../assets/hero-img.png';
+import { APP_FEATURES } from '../../utils/data';
+// import { useNavigate } from 'react-router-dom';
+import { LuSparkles } from "react-icons/lu";
 import Model from '../../components/Model';
 import SignUp from '../Auth/SignUp';
+import { Icon } from "@iconify/vue";
 import Login from '../Auth/Login';
+import ProfileInfoCard from '../../components/Cards/ProfileInfoCard';
 import { UserContext } from '../../context/useContext';
 import GotoDashboardCard from '../GotoDashboardCard';
 import Logo from '../../logo';
@@ -36,7 +42,24 @@ const LandingPage = () => {
   };
 
   return (
-    <DashboardLayout>
+    <div className="font-sans text-gray-200 overflow-x-hidden">
+
+      <header className="fixed top-0 w-full z-10 px-4 md:px-8 py-3 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+
+          <Logo />
+
+          {user ? (
+            <ProfileInfoCard />
+          ) : (
+            <button className="inline-flex items-center gap-2 bg-[#12121e99] text-[#00ffe0] border border-[#00ffe055] px-5 py-2 text-[0.95rem] rounded-full font-medium cursor-pointer backdrop-blur-md shadow-[0_0_6px_rgba(0,255,224,0.15)] hover:bg-[#1e1e32cc] hover:text-white hover:border-[#00ffe0] hover:shadow-[0_0_12px_rgba(0,255,224,0.4)] hover:-translate-y-0.5 transition-all duration-300" onClick={() => setOpenAuthModal(true)}>
+              <i data-lucide="log-in" className="w-4 h-4"></i>
+              <span className="hidden sm:inline">Login / Sign Up</span>
+            </button>
+          )}
+
+        </div>
+      </header>
       <section className="hero-gradient min-h-screen flex flex-col items-center justify-center py-8 px-4 animate-[heroShift_20s_ease-in-out_infinite] relative z-0">
         <LandingParticles />
         <div className="relative z-10 text-center px-4 max-w-3xl">
@@ -285,7 +308,7 @@ const LandingPage = () => {
           <SignUp setCurrentPage={setCurrentPage} openAuthModel={setOpenAuthModal} />
         )}
       </Model>
-    </DashboardLayout>
+    </div>
   );
 }
 
