@@ -89,7 +89,7 @@ const CreateMockTestForm = () => {
             </h3>
 
             <p className="text-sm text-slate-400 mb-6">
-                Fill out a few quick details and unlock your personalized set of interview questions!
+                Fill out a few quick details and unlock your personalized set of Mock Test!
             </p>
 
             <form onSubmit={handleCreateSession} className="flex flex-col gap-5">
