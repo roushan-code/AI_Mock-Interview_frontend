@@ -3,6 +3,7 @@ import { BASE_URL } from './apiPaths';
 
 const axiosInstance = axios.create({
     baseURL: BASE_URL,
+    credenctials: 'include', // Include cookies in requests
     
     headers: {
         'Content-Type': 'application/json',
