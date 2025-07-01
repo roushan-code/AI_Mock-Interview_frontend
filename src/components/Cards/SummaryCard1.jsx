@@ -76,7 +76,7 @@ const SummaryCard = ({
                         Start
                     </button>
                     <button
-                        className="opacity-0 group-hover:opacity-100 flex items-center gap-1 text-xs text-red-400 font-medium bg-red-500/10 border border-red-500/30 px-3 py-1.5 rounded-full hover:bg-red-500/20 hover:border-red-500/50 cursor-pointer transition-all duration-300"
+                        className="opacity-100 flex items-center gap-1 text-xs text-red-400 font-medium bg-red-500/10 border border-red-500/30 px-3 py-1.5 rounded-full hover:bg-red-500/20 hover:border-red-500/50 cursor-pointer transition-all duration-300"
                         onClick={(e) => {
                             e.stopPropagation();
                             onDelete();
