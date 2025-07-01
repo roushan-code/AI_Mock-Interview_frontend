@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from '../../components/Inputs/input';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector.jsx';
 import { validateEmail } from "../../utils/helper.js";
 import { UserContext } from "../../context/useContext.jsx";

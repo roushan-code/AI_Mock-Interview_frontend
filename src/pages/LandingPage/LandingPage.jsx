@@ -1,16 +1,10 @@
 
 import "./LandingPage.css";
 
-import React, { useContext, useState, useEffect } from 'react';
-// import HERO_IMG from '../../assets/hero-img.png';
-import { APP_FEATURES } from '../../utils/data';
-// import { useNavigate } from 'react-router-dom';
-import { LuSparkles } from "react-icons/lu";
+import { useContext, useState, useEffect } from 'react';
 import Model from '../../components/Model';
 import SignUp from '../Auth/SignUp';
-import { Icon } from "@iconify/vue";
 import Login from '../Auth/Login';
-import ProfileInfoCard from '../../components/Cards/ProfileInfoCard';
 import { UserContext } from '../../context/useContext';
 import GotoDashboardCard from '../GotoDashboardCard';
 import Logo from '../../logo';

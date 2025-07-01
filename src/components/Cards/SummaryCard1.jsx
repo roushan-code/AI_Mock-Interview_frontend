@@ -1,4 +1,3 @@
-import React from 'react'
 import { LuTrash2, LuPlay, LuClock, LuBookOpen } from 'react-icons/lu';
 import { getInitials } from '../../utils/helper';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
