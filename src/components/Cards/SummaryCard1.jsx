@@ -1,75 +1,98 @@
 import React from 'react'
-import { LuTrash2 } from 'react-icons/lu';
+import { LuTrash2, LuPlay, LuClock, LuBookOpen } from 'react-icons/lu';
 import { getInitials } from '../../utils/helper';
+import { IoIosCheckmarkCircle } from 'react-icons/io';
 
 const SummaryCard = ({
     colors,
-    role,
+    course,
     topicsToFocus,
-    experience,
-    questions,
     description,
     lastUpdated,
     onSelect,
     onDelete,
+    isGiven
 }) => {
-    // console.log("colors", colors);
-    return <div
-        className="bg-[#343665] border rounded-xl p-2 overflow-hidden cursor-pointer hover:shadow-[0px_50px_100px_-20px_rgb(47_37_104_/_80%),0px_30px_60px_-30px_rgb(66_54_88_/_70%),0px_-2px_6px_0px_inset_rgba(7,0,26,0.98)] shadow-[0px_50px_100px_-20px_rgb(47_37_104_/_14%),0px_30px_60px_-30px_rgb(66_54_88_/_0%),0px_-2px_6px_0px_inset_rgba(7,0,26,0.98)] relative group"
-        onClick={onSelect}>
+    return (
         <div
-            className="rounded-lg pb-4 pt-4 cursor-pointer relative"
-            style={{
-                background: colors.bgcolor,
-            }}>
-            <div className='flex items-start'>
-                <div className='flex-shrink-0 w-12 h-12 rounded-md flex items-center justify-center mr-4'>
-                    <span className="text-lg font-semibold text-[#e4e4e4]">
-                        {getInitials(role)}
-                    </span>
-                </div>
-                {/* Content Container */}
-                <div className="glex-grow">
-                    <div className="flex justify-between items-start">
-                        {/* Title and Skills */}
-                        <div>
-                            <h2 className="text-[17px] text-[#e4e4e4] font-medium">{role}</h2>
-                            <p className="text-xs text-medium text-[#e4e4e4]">
-                                {topicsToFocus}
-                            </p>
-                        </div>
+            className="bg-[#1e1e28cc] border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-[0_6px_20px_rgba(0,255,255,0.04)] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(0,255,255,0.08)] transition duration-300 cursor-pointer relative group"
+            onClick={onSelect}
+        >
+            {/* Header Section */}
+            <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-[#00ffe0]/20 rounded-full flex items-center justify-center">
+                        <span className="text-lg font-semibold text-[#00ffe0] drop-shadow-[0_0_4px_#00ffe088]">
+                            {getInitials(course)}
+                        </span>
+                    </div>
+                    <div>
+                        <h3 className="text-white font-semibold text-lg mb-1">{course}</h3>
+                        <p className="text-slate-300 text-sm">{topicsToFocus}</p>
                     </div>
                 </div>
+
+                {/* Status indicator */}
+                {isGiven && (
+                    <div className="flex items-center gap-1 bg-[#00ffe0]/20 border border-[#00ffe0]/50 rounded-full px-3 py-1">
+                        <IoIosCheckmarkCircle className="text-[#00ffe0] text-sm" />
+                        <span className="text-[#00ffe0] text-xs font-medium">Completed</span>
+                    </div>
+                )}
             </div>
 
-            <button
-                className='hidden group-hover:flex items-center gap-2 text-xs text-rose-500 font-medium bg-rose-50 px-3 py-1 rounded text-nowrap border border-rose-100 hover:border-rose-200 cursor-pointer absolute top-0 right-0'
-                onClick={(e) => {
-                    e.stopPropagation();
-                    onDelete();
-                }}
-            >
-                <LuTrash2/>
-            </button>
-        </div>
+            {/* Description */}
+            <div className="mb-4">
+                <p className="text-slate-300 text-sm line-clamp-2 leading-relaxed">
+                    {description || "No description available"}
+                </p>
+            </div>
 
-        <div className='px-3 pb-3'>
-            <div className="flex items-center gap-3 mt-4">
-                <div className="text-[10px] font-medium text-[#b1b1b1] px-3 py-1 border-[0.5px] border-gray-300/900 rounded-full">
-                    Questions level: "Hard"
+            {/* Stats Pills matching LandingPage feature pills */}
+            <div className="flex flex-wrap gap-2 mb-4">
+                <div className="bg-white/10 px-3 py-1 rounded-xl text-xs backdrop-blur-sm flex gap-2 items-center text-[#7dd3fc]">
+                    <LuBookOpen className="w-3 h-3 drop-shadow-[0_0_4px_#7dd3fc77]" />
+                    20 Questions
                 </div>
-                <div className="text-[10px] font-medium text-[#b1b1b1] px-3 py-1 border-[0.5px] border-gray-300/900 rounded-full">
-                    {questions} Q&A
-                </div>
-                <div className="text-[10px] font-medium text-[#b1b1b1] px-3 py-1 border-[0.5px] border-gray-300/900 rounded-full">
-                    Created at: {lastUpdated}
+                <div className="bg-white/10 px-3 py-1 rounded-xl text-xs backdrop-blur-sm flex gap-2 items-center text-[#7dd3fc]">
+                    <LuClock className="w-3 h-3 drop-shadow-[0_0_4px_#7dd3fc77]" />
+                    {lastUpdated}
                 </div>
             </div>
-            <p className="text-[12px] text-[#ddf3ee] font-medium line-clamp-2 mt-3">
-                {description}
-            </p>
+
+            {/* Action Buttons */}
+            <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                <span className="text-slate-400 text-xs">
+                    Click to start test
+                </span>
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onSelect();
+                        }}
+                        className="flex items-center gap-1 bg-[#12121e] text-[#00ffe0] border border-[#00ffe0]/50 font-medium px-3 py-1.5 text-xs rounded-full cursor-pointer shadow-[0_0_4px_rgba(0,255,224,0.15)] hover:bg-[#1e1e32] hover:text-white hover:border-[#00ffe0] hover:shadow-[0_0_8px_rgba(0,255,224,0.4)] transition-all duration-300"
+                    >
+                        <LuPlay className="w-3 h-3" />
+                        Start
+                    </button>
+                    <button
+                        className="opacity-0 group-hover:opacity-100 flex items-center gap-1 text-xs text-red-400 font-medium bg-red-500/10 border border-red-500/30 px-3 py-1.5 rounded-full hover:bg-red-500/20 hover:border-red-500/50 cursor-pointer transition-all duration-300"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete();
+                        }}
+                    >
+                        <LuTrash2 className="w-3 h-3" />
+                        Delete
+                    </button>
+                </div>
+            </div>
+
+            {/* Hover overlay effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#00ffe0]/5 to-[#7dd3fc]/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
         </div>
-    </div>
+    )
 }
 
 export default SummaryCard

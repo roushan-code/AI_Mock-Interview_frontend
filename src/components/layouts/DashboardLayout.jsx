@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Navbar from "./Navbar";
 import { UserContext } from "../../context/useContext";
 
@@ -7,7 +7,7 @@ const DashboardLayout=({ children }) => {
     return (
     <div style={{ height: "fit-content", paddingBottom: "20px" }} >
         <Navbar/>
-        {user && <div >{children}</div>}
+        {user && <div  >{children}</div>}
     </div>
     );
 };

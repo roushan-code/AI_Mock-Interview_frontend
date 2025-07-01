@@ -61,8 +61,6 @@ export const UserContext = createContext();
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
-
     const [metaData, setMetaData] = useState(mockData);
 
     useEffect(() => {
@@ -73,8 +71,6 @@ const UserProvider = ({ children }) => {
             setLoading(false);
             return;
         }
-
-
         const fetchUser = async () => {
             try {
                 const response = await axiosInstance.get(API_PATHS.AUTH.GET_PROFILE);

@@ -7,7 +7,7 @@ const GotoDashboardCard = ({gotoDashboard}) => {
 
 
   return (          
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[47rem]" >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[80%] m-auto md:max-w-[47rem] " >
     
                       {/* AI Powered Learning Card */}
                       <div className="bg-[linear-gradient(30deg,#000000_0%,#151229_100%)] flex flex-col justify-around gap-1.5 border border-purple-600 rounded-2xl p-8 shadow-lg hover:shadow-purple-600 transition duration-300">

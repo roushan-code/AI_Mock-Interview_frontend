@@ -17,6 +17,7 @@ import Logo from '../../logo';
 
 import { createIcons, icons } from "lucide";
 import LandingParticles from '../../components/LandingParticles';
+import DashboardLayout from "../../components/layouts/DashboardLayout";
 
 const LandingPage = () => {
 
@@ -41,25 +42,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="font-sans text-gray-200 overflow-x-hidden">
-
-      <header className="fixed top-0 w-full z-10 px-4 md:px-8 py-3 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-
-          <Logo />
-
-          {user ? (
-            <ProfileInfoCard />
-          ) : (
-            <button className="inline-flex items-center gap-2 bg-[#12121e99] text-[#00ffe0] border border-[#00ffe055] px-5 py-2 text-[0.95rem] rounded-full font-medium cursor-pointer backdrop-blur-md shadow-[0_0_6px_rgba(0,255,224,0.15)] hover:bg-[#1e1e32cc] hover:text-white hover:border-[#00ffe0] hover:shadow-[0_0_12px_rgba(0,255,224,0.4)] hover:-translate-y-0.5 transition-all duration-300" onClick={() => setOpenAuthModal(true)}>
-              <i data-lucide="log-in" className="w-4 h-4"></i>
-              <span className="hidden sm:inline">Login / Sign Up</span>
-            </button>
-          )}
-
-        </div>
-      </header>
-
+    <DashboardLayout>
       <section className="hero-gradient min-h-screen flex flex-col items-center justify-center py-8 px-4 animate-[heroShift_20s_ease-in-out_infinite] relative z-0">
         <LandingParticles />
         <div className="relative z-10 text-center px-4 max-w-3xl">
@@ -112,7 +95,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <div className={`${gotoDashboard ? 'flex' : 'hidden'} fixed inset-0 flex z-100 items-center justify-center w-full h-full bg-black/40 `} onClick={() => setGotoDashboard(false)}>
+      <div className={`${gotoDashboard ? 'flex' : 'hidden'} fixed inset-0 flex z-100 items-center justify-center overflow-y-scroll w-full h-full bg-black/40 `} onClick={() => setGotoDashboard(false)}>
         <GotoDashboardCard gotoDashboard={gotoDashboard} />
       </div>
 
@@ -308,7 +291,7 @@ const LandingPage = () => {
           <SignUp setCurrentPage={setCurrentPage} openAuthModel={setOpenAuthModal} />
         )}
       </Model>
-    </div>
+    </DashboardLayout>
   );
 }
 

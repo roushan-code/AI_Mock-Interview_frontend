@@ -10,20 +10,20 @@ import InterviewPrep from "./pages/InterviewPrep/InterviewPrep.jsx";
 import UserProvider from './context/useContext.jsx';
 import Dashboard1 from './pages/Home/Dashboard1.jsx';
 import MockTest from './pages/MockTest/MockTest.jsx';
+import TestResult from './pages/MockTest/TestResult.jsx';
 
 const App = () => {
   return (
     <UserProvider>
-    <div className='bg-[#0d0d17]' >
+    <div className='bg-[#12121e]' >
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          {/* <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} /> */}
           <Route path="/dashboard/ai-learning" element={<Dashboard />} />
           <Route path="/dashboard/mock-test" element={<Dashboard1 />} />
           <Route path="/interview-prep/:sessionId" element={<InterviewPrep />} />
-          <Route path="/mock-test/test" element={<MockTest />} />
+          <Route path="/mock-test/:sessionId" element={<MockTest />} />
+          <Route path="/dashboard/results/:sessionId" element={<TestResult />} />
         </Routes>
       </Router>
         <Toaster toastOptions={{ 

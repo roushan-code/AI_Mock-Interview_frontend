@@ -27,7 +27,7 @@ const QuestionCard = ({
     };
 
     return <>
-        <div className="bg-[#5238d2c7] rounded-lg mb-4 overflow-hidden py-4 px-5 hover:shadow-[0px_50px_100px_-20px_rgb(82_66_168_/_50%),0px_30px_60px_-30px_rgb(117_89_168_/_50%),0px_-2px_6px_0px_inset_rgb(46_24_104_/_98%)]">
+        <div className="bg-[#00dfde91] rounded-lg mb-4 overflow-hidden py-4 px-5 hover:shadow-[0px_50px_100px_-20px_rgb(82_66_168_/_50%),0px_30px_60px_-30px_rgb(117_89_168_/_50%),0px_-2px_6px_0px_inset_rgb(46_24_104_/_98%)]">
             <div className="flex items-start justify-between cursor-pointer">
                 <div className="flex items-start gap-3.5">
                     <span className="text-xs md: text-[15px] font-semibold text-white leading-[18px]">

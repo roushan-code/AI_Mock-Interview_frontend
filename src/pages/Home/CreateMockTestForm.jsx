@@ -8,8 +8,8 @@ import { API_PATHS } from "../../utils/apiPaths";
 
 const CreateMockTestForm = () => {
     const [formData, setFormData] = useState({
-        role: "",
-        questionLevel: "",
+        course: "",
+        difficulty: "",
         topicsToFocus: "",
         description: "",
     });
@@ -24,72 +24,65 @@ const CreateMockTestForm = () => {
     };
     const handleCreateSession = async (e) => {
         e.preventDefault();
-        const { role, questionLevel, topicsToFocus } = formData;
-        if (!role || !questionLevel || !topicsToFocus) {
+        const { course, difficulty, topicsToFocus} = formData;
+        if (!course || !difficulty || !topicsToFocus) {
             setError("Please fill all the required fields.");
             return;
         }
-        if (questionLevel !== "Easy" && questionLevel !== "Medium" && questionLevel !== "Hard") {
+        if (difficulty !== "Easy" && difficulty !== "Medium" && difficulty !== "Hard" && difficulty !== "easy" && difficulty !== "medium" && difficulty !== "hard") {
             setError("Please select a valid question level (Easy, Medium, Hard).");
             return;
         }
-        
+
         setError(null);
         setIsLoading(true);
 
-        // console.log(formData);
         try {
-            // console.log("start creating");
             const aiResponse = await axiosInstance.post(
-                API_PATHS.AI.GENERATE_QUESTIONS,
+                API_PATHS.AI.GENERATE_MOCK_QUESTIONS,
                 {
-                    role,
-                    experience,
+                    course,
+                    difficulty,
                     topicsToFocus,
-                    numberOfQuestions: 10,
+                    numberOfQuestions: 20,
                 }
             );
-            // console.log(aiResponse);
 
-            // Should be array like [{question: "", answer: ""}, ...]
+            
             const responseData = aiResponse.data?.data;
+        
+        // Create a local variable instead of relying on state update
+        const sessionTimeLimit = responseData?.Time || 1200;
 
-            if (!responseData || !Array.isArray(responseData)) {
-            throw new Error("Invalid response format from AI service");
-        }
+        
 
-            const validatedQuestions = responseData.map(q => {
-            if (!q.question || !q.answer) {
-                throw new Error("Invalid question format in AI response");
+            if (!responseData.questions || !Array.isArray(responseData.questions)) {
+                throw new Error("Invalid response format from AI service");
             }
-            return {
-                question: q.question.trim(),
-                answer: q.answer.trim()
-            };
-        });
+
 
             const response = await axiosInstance.post(
-                API_PATHS.SESSION.CREATE,{
-                    ...formData,
-                questions: validatedQuestions,
-                });
+                API_PATHS.SESSION.CREATE_MOCK_SESSION, {
+                ...formData,
+                timeLimit: sessionTimeLimit,
+                questions: responseData.questions // ✅ Use the local variable
+            });
 
-                if(response.data?.session?._id){
-                    navigate(`/interview-prep/${response.data?.session._id}`);
-                }
-                setIsLoading(false);
+            if (response.data?.session?._id) {
+                navigate(`/mock-test/${response.data?.session._id}`);
+            }
+            setIsLoading(false);
         } catch (err) {
-            // // console.log(err)
-            if(err.response && err.response.data.message) {
+            console.log(err)
+            if (err.response && err.response.data.message) {
                 setError(err.response.data.message);
-            }else {
+            } else {
                 setError("An error occurred while creating the session.");
             }
-        }finally {
+        } finally {
             setIsLoading(false);
         }
-
-    };
+    }
     return (
         <div className="w-full px-4 flex flex-col justify-center text-slate-200">
             <h3 className="text-xl font-semibold text-white mb-1">
@@ -109,8 +102,8 @@ const CreateMockTestForm = () => {
                 <input
                     id="role"
                     type="text"
-                    value={formData.role}
-                    onChange={({ target }) => handleChange("role", target.value)}
+                    value={formData.course}
+                    onChange={({ target }) => handleChange("course", target.value)}
                     placeholder="(e.g., BCA, MCA, BTech etc.)"
                     className="bg-[#1e1e28] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#00ffe0]/60 shadow-inner transition"
                 />
@@ -124,8 +117,8 @@ const CreateMockTestForm = () => {
                 <input
                     id="experience"
                     type="text"
-                    value={formData.experience}
-                    onChange={({ target }) => handleChange("experience", target.value)}
+                    value={formData.difficulty}
+                    onChange={({ target }) => handleChange("difficulty", target.value)}
                     placeholder="(Easy, Medium, Hard)"
                     className="bg-[#1e1e28] border border-white/10 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#00ffe0]/60 shadow-inner transition"
                 />
