@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { LuPlus, LuTrendingUp, LuBook, LuTarget } from "react-icons/lu";
 import { CARD_BG } from "../../utils/data";
 import toast from "react-hot-toast";
@@ -12,7 +12,7 @@ import Model from '../../components/Model.jsx';
 import CreateMockTestForm from './CreateMockTestForm.jsx';
 import DeleteAlertContent from '../../components/Loaders/DeleteAlertContent.jsx';
 
-const   Dashboard1 = () => {
+const Dashboard1 = () => {
   const navigate = useNavigate();
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [sessions, setSessions] = useState([]);
@@ -53,7 +53,7 @@ const   Dashboard1 = () => {
       console.error("Error deleting session:", error);
       toast.error("Failed to delete session");
     }
-   };
+  };
 
   useEffect(() => {
     fetchAllSessions();
@@ -62,7 +62,7 @@ const   Dashboard1 = () => {
   // Calculate statistics
   const totalSessions = sessions?.length || 0;
   const completedSessions = sessions?.filter(session => session.isGiven)?.length || 0;
-  
+
 
   return (
     <DashboardLayout>
@@ -70,9 +70,9 @@ const   Dashboard1 = () => {
         {/* Background blur elements matching LandingPage */}
         <div className="w-1/3 h-1/3 bg-[#00ffe0]/5 blur-[65px] absolute top-0 left-0 opacity-60" />
         <div className="w-1/4 h-1/4 bg-[#7dd3fc]/5 blur-[50px] absolute bottom-0 right-0 opacity-40" />
-        
+
         <div className="container mx-auto pt-20 pb-8 px-4 relative ">
-          
+
           {/* Header Section */}
           <div className="mb-12">
             <h1 className="text-4xl text-white font-medium mb-3">
@@ -106,7 +106,7 @@ const   Dashboard1 = () => {
               <div className="flex items-center justify-center w-12 h-12 bg-[#00ffe0]/20 rounded-full mb-4 mx-auto">
                 <LuBook className="text-[#00ffe0] text-xl drop-shadow-[0_0_4px_#00ffe088]" />
               </div>
-              <div className="text-3xl font-semibold text-white mb-2">{percentage|| 0}%</div>
+              <div className="text-3xl font-semibold text-white mb-2">{percentage || 0}%</div>
               <div className="text-slate-300 text-sm">Average Percentage</div>
             </div>
           </div>
@@ -117,7 +117,7 @@ const   Dashboard1 = () => {
             {sessions?.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {sessions?.map((data, index) => (
-                  <SummaryCard1 
+                  <SummaryCard1
                     key={data._id}
                     colors={CARD_BG[index % CARD_BG.length]}
                     course={data?.course || ""}
@@ -138,7 +138,7 @@ const   Dashboard1 = () => {
                   />
                 ))}
               </div>
-            ) : (
+            ) : sessions?.length === 0 ? (
               <div className="text-center py-16">
                 <div className="bg-[#1e1e28cc] border border-white/10 rounded-2xl p-12 backdrop-blur-md shadow-[0_6px_20px_rgba(0,255,255,0.04)] max-w-md mx-auto">
                   <div className="w-20 h-20 bg-[#00ffe0]/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -154,11 +154,18 @@ const   Dashboard1 = () => {
                   </button>
                 </div>
               </div>
+            ) : (
+              <div className="min-h-screen bg-[#12121e] flex items-center justify-center pt-16">
+                <div className="bg-[#1e1e28cc] backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-[0_6px_24px_rgba(0,0,0,0.4)]">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00ffe0] mx-auto mb-4"></div>
+                  <p className="text-slate-200 text-center">Loading Mock Sessions...</p>
+                </div>
+              </div>
             )}
           </div>
 
           {/* Floating Add Button matching LandingPage CTA style */}
-          <button 
+          <button
             className="fixed bottom-8 right-8 w-14 h-14 bg-[#12121e] text-[#00ffe0] border-2 border-[#00ffe0] rounded-full flex items-center justify-center shadow-[0_0_8px_rgba(0,255,224,0.25)] hover:bg-[#1e1e32] hover:text-white hover:shadow-[0_0_16px_rgba(0,255,224,0.5)] hover:-translate-y-0.5 transition-all duration-300 z-50"
             onClick={() => setOpenCreateModal(true)}
           >
@@ -173,7 +180,7 @@ const   Dashboard1 = () => {
           hideHeader
         >
           <div>
-            <CreateMockTestForm/>
+            <CreateMockTestForm />
           </div>
         </Model>
 

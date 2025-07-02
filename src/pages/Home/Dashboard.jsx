@@ -91,7 +91,7 @@ const Dashboard = () => {
                   />
                 ))}
               </div>
-            ) : (
+            ) : sessions?.length === 0 ? (
               <div className="text-center py-16">
                 <div className="bg-[#1e1e28cc] border border-white/10 rounded-2xl p-12 backdrop-blur-md shadow-[0_6px_20px_rgba(0,255,255,0.04)] max-w-md mx-auto">
                   <div className="w-20 h-20 bg-[#00ffe0]/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -105,6 +105,13 @@ const Dashboard = () => {
                   >
                     Create Session
                   </button>
+                </div>
+              </div>
+            ) : (
+              <div className="min-h-screen bg-[#12121e] flex items-center justify-center pt-16">
+                <div className="bg-[#1e1e28cc] backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-[0_6px_24px_rgba(0,0,0,0.4)]">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00ffe0] mx-auto mb-4"></div>
+                  <p className="text-slate-200 text-center">Loading Mock Sessions...</p>
                 </div>
               </div>
             )}
