@@ -35,7 +35,7 @@ const   Dashboard1 = () => {
       setPercentage(percent.toFixed(2) || 0);
     } catch (error) {
       console.error("Error fetching sessions:", error);
-      toast.error("Failed to fetch sessions");
+      toast.error("Failed to fetch sessions. Please refresh the page.");
     }
     finally {
       setIsLoading(false);
@@ -106,7 +106,7 @@ const   Dashboard1 = () => {
               <div className="flex items-center justify-center w-12 h-12 bg-[#00ffe0]/20 rounded-full mb-4 mx-auto">
                 <LuBook className="text-[#00ffe0] text-xl drop-shadow-[0_0_4px_#00ffe088]" />
               </div>
-              <div className="text-3xl font-semibold text-white mb-2">{percentage|| 0}</div>
+              <div className="text-3xl font-semibold text-white mb-2">{percentage|| 0}%</div>
               <div className="text-slate-300 text-sm">Average Percentage</div>
             </div>
           </div>
