@@ -238,7 +238,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <section className="py-20 px-8 bg-[#12121e99] backdrop-blur-md border border-white/5 shadow-[0_6px_24px_rgba(0,0,0,0.4)] text-[#f1f5f9] text-center max-w-[1100px] mx-auto my-16 rounded-xl">
+      {/* <section className="py-20 px-8 bg-[#12121e99] backdrop-blur-md border border-white/5 shadow-[0_6px_24px_rgba(0,0,0,0.4)] text-[#f1f5f9] text-center max-w-[1100px] mx-auto my-16 rounded-xl">
         <h2 className="text-2xl md:text-3xl font-semibold mb-6">🎤 Try a Demo Interview</h2>
         <p className="text-slate-300 max-w-xl mx-auto mb-10 text-sm md:text-base">
           Select a role and skillset to preview the kind of questions PrepPilot generates for you.
@@ -253,7 +253,7 @@ const LandingPage = () => {
         <button className="mt-6 inline-flex items-center gap-2 bg-[#12121e99] text-[#00ffe0] border border-[#00ffe055] px-5 py-2 text-[0.95rem] rounded-full font-medium cursor-pointer backdrop-blur-md shadow-[0_0_6px_rgba(0,255,224,0.15)] hover:bg-[#1e1e32cc] hover:text-white hover:border-[#00ffe0] hover:shadow-[0_0_12px_rgba(0,255,224,0.4)] hover:-translate-y-0.5 transition-all duration-300">
           Generate Another
         </button>
-      </section>
+      </section> */}
 
       <section className="py-20 px-8 bg-[#12121e99] backdrop-blur-md border border-white/5 shadow-[0_6px_24px_rgba(0,0,0,0.4)] text-[#f1f5f9] text-center max-w-[1100px] mx-auto my-16 rounded-xl">
         <h2 className="text-2xl md:text-3xl font-semibold mb-10">❓ Frequently Asked Questions</h2>
