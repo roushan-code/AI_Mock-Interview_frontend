@@ -15,7 +15,7 @@ import DeleteAlertContent from '../../components/Loaders/DeleteAlertContent.jsx'
 const Dashboard1 = () => {
   const navigate = useNavigate();
   const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [sessions, setSessions] = useState([]);
+  const [sessions, setSessions] = useState(null);
   const [percentage, setPercentage] = useState(0);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     open: false,
